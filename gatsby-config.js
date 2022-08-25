@@ -1,12 +1,22 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Design+Code 3`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+
     author: `@gatsbyjs`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `9x5jlijc0n7s`,
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        accessToken: "NGZmUG8GqsMMNG0Amf6aGh2qfqYWdYDV-XBHcj_NJbE",
+      },
+    },
     `gatsby-plugin-image`,
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {

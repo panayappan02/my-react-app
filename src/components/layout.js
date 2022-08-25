@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
+import Footer from "./Footer"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -18,34 +19,33 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          description
+        }
+      }
+
+      allContentfulLink(sort: { fields: [createdAt], order: ASC }) {
+        edges {
+          node {
+            title
+            url
+            createdAt
+          }
         }
       }
     }
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <div>
+      <Header />
+      {children}
+
+      <Footer data={data}>
+        Backgrounds made in Cinema 4D, iOS app in Swift, site in React.{" "}
+        <a href="mailto:panayappan02@gmail.com">Email us </a> to ask anything. ©
+        2018
+      </Footer>
+    </div>
   )
 }
 
